@@ -12,5 +12,5 @@ namespace CourseProject.Controllers
         {
             return View();
         }
-    }
+    }/*Test comment here by Jon Szymczak*/
 }
