@@ -8,6 +8,9 @@ namespace CourseProject.Controllers
 {
     public class AdminController : Controller
     {
+
+        /*this is a test comment*/
+
         public IActionResult Home()
         {
             return View();
