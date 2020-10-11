@@ -42,7 +42,7 @@ namespace CourseProject
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=SwimSchool}/{action=Visitors}/{id?}");
+                    pattern: "{controller=Admin}/{action=Home}/{id?}");
             });
 
         }
