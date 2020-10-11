@@ -6,19 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseProject.Controllers
 {
-    public class AdminController : Controller
+    public class AccountController : Controller
     {
-        public IActionResult Home()
+        public IActionResult Login()
         {
             return View();
         }
 
-        public IActionResult AddRole()
-        {
-            return View();
-        }
-
-        public IActionResult AllRole()
+        public IActionResult Register()
         {
             return View();
         }
