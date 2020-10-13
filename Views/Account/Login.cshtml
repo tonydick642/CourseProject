@@ -1,6 +1,19 @@
-﻿
+﻿@model CourseProject.Models.Admin
     
 <h1>User Login</h1>
+<form asp-controller="Account" asp-action="Login" method="post">
+    <label asp-for="AdminEmail">Email</label>
+    <input asp-for="AdminEmail" />
+    <br />
+    <label asp-for="AdminPassword">Password</label>
+    <input asp-for="AdminPassword" />
+    <br />
+    <button type="submit">Log In</button>
+</form>
+<h5>
+    New swimmer? <a asp-action="Register">Register here</a>
+</h5>
+
 
 
 <p> &copy; 2020 - Team Quatro</p>
