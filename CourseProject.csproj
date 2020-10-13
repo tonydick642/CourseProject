@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModels\" />
     <Folder Include="Views\Coach\" />
     <Folder Include="Views\Swimmer\" />
   </ItemGroup>

@@ -9,6 +9,7 @@ namespace CourseProject.Models
     {
         public int SwimmerId { get; set; }
         public string SwimmerName { get; set; }
-        
+        public ICollection<Enrollment> Enrollments { get; set; }
+        public ICollection<ProgressReport> ProgressReports { get; set; }
     }
 }
