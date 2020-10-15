@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CourseProject.Models
 {
-    public class SwimSchoolDbContext : DbContext
+    public class SwimSchoolDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Swimmer> Swimmers { get; set; }
         public DbSet<Admin> Admins { get; set; }
