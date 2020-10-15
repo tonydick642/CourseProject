@@ -1,10 +1,11 @@
-﻿@model CourseProject.Models.Admin
+﻿@model CourseProject.ViewModels.AccountLoginViewModel
     
 <h1>User Login</h1>
-<form asp-controller="Account" asp-action="Login" method="post">
+<form asp-action="Login" method="post">
+    <div asp-validation-summary="All"></div>
     <label asp-for="Email">Email</label>
     <input asp-for="Email" />
-    <span asp-validation-for="Email" </span>
+    <span asp-validation-for="Email"> </span>
     <br />
     <label asp-for="Password">Password</label>
     <input asp-for="Password" />

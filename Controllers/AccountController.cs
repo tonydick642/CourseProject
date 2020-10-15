@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using CourseProject.Models;
 using CourseProject.ViewModels;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
