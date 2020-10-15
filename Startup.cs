@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CourseProject.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CourseProject
 {
@@ -23,6 +24,9 @@ namespace CourseProject
                     Trusted_Connection=True;";
             services.AddDbContext<SwimSchoolDbContext>
                 (options => options.UseSqlServer(connection));
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,7 +38,8 @@ namespace CourseProject
             }
 
             app.UseRouting();
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
