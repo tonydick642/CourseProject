@@ -29,6 +29,22 @@ namespace CourseProject.Controllers
             return View();
         }
 
+        [HttpPost] // making login button work
+        public async Task<IActionResult> Login(AccountLoginViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await signInManager.PasswordSignInAsync
+                    (vm.Email, vm.Password, false, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                ModelState.AddModelError("", "Login Failure.");
+            }
+            return View(vm);
+        }
+
         public IActionResult Register()
         {
             return View();
@@ -62,20 +78,5 @@ namespace CourseProject.Controllers
 
         }
         
-        [HttpPost] // making login button work
-        public async Task<IActionResult> Login(AccountLoginViewModel vm)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await signInManager.PasswordSignInAsync
-                    (vm.Email, vm.Password, false, false);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                ModelState.AddModelError("", "Login Failure.");
-            }
-            return View(vm);
-        }
     }
 }
