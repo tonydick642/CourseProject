@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseProject.Models;
+using CourseProject.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,6 +43,20 @@ namespace CourseProject.Controllers
                 return RedirectToAction("AllRole");
             }
             return View();
+        }
+
+        public async Task<IActionResult> AddUserRole(string id)
+        {
+            var roleDisplay = db.Roles.Select(x => new
+            {
+                Id = x.Id,
+                Value = x.Name
+            }).ToList();
+            RoleAddUserRoleViewModel vm = new RoleAddUserRoleViewModel();
+            var user = await userManager.FindByIdAsync(id);
+            vm.User = user;
+            vm.RoleList = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(roleDisplay, "Id", "Value");
+            return View(vm);
         }
 
     }
