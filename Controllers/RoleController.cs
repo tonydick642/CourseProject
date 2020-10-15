@@ -20,5 +20,12 @@ namespace CourseProject.Controllers
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
+
+        public IActionResult AllRole()
+        {
+            var roles = roleManager.Roles.ToList();
+            return View(roles);
+        }
     }
+
 }
