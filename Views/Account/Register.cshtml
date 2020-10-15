@@ -1,25 +1,20 @@
-﻿@model CourseProject.Models.Admin
+﻿@model CourseProject.ViewModels.AccountRegisterViewModel
 
 <h1>User Registration</h1>
-<form asp-controller="Account" asp-action="Login" method="post">
-    <label asp-for="Email">Email Address</label>
+<form asp-action="Register" method="post">
+    <div asp-validation-summary="All"></div>
+    <label asp-for="Email"></label>
     <input asp-for="Email" />
-    <br />
-    <label asp-for="Password">Password</label>
+    <span asp-validation-for="Email"></span>
+    </br>
+    <label asp-for="Password"></label>
     <input asp-for="Password" />
-    <br />
-    <label asp-for="Password">Confirm Password</label>
-    <input asp-for="Password" />
-    <br />
+    <span asp-validation-for="Password"></span>
+    </br>
+    <label asp-for="ConfirmPassword"></label>
+    <input asp-for="ConfirmPassword" />
+    <span asp-validation-for="ConfirmPassword"></span>
+    </br>
     <button type="submit">Register</button>
 </form>
-<h5>
-    <a asp-action="Login">Back to Login</a>
-</h5>
-
-
-
-
-
-
 <p> &copy; 2020 - Team Quatro</p>
