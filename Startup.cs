@@ -25,7 +25,7 @@ namespace CourseProject
             services.AddDbContext<SwimSchoolDbContext>
                 (options => options.UseSqlServer(connection));
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<SwimSchoolDbContext>()
                 .AddDefaultTokenProviders();
         }
 
