@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
 <p><a asp-action="AddRole">Add a role</a></p>
-@{ 
+@{
     if (Model.Count() < 1)
     {
         <p>No role in database yet.</p>
@@ -20,4 +20,6 @@
             }
         </table>
     }
+    <p><a asp-controller="Admin" asp-action="">Admin Home</a></p>
+    <p> &copy; 2020 - Team Quatro</p>
 }
