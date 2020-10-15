@@ -29,7 +29,18 @@ namespace CourseProject.Controllers
 
         public IActionResult AddRole()// add role method
         {
-            
+
+            return View();
+        }
+
+        [HttpPost] //make add role work
+        public async Task<IActionResult> AddRole(IdentityRole role)
+        {
+            var result = await roleManager.CreateAsync(role);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("AllRole");
+            }
             return View();
         }
 
