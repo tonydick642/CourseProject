@@ -77,6 +77,12 @@ namespace CourseProject.Controllers
             return View(vm);
 
         }
+
+        public IActionResult AllUser() //viewing all users
+        {
+            var users = db.Users.ToList();
+            return View(users);
+        }
         
     }
 }
