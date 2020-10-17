@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
 <p><a asp-action="Register">Add a user</a></p>
-@{ 
+@{
     if (Model.Count() < 1)
     {
         <p> No User in database yet.</p>
@@ -17,14 +17,20 @@
             {
                 <tr>
                     <td>@user.UserName</td>
-                    <td><a asp-controller="Role"
+                    <td>
+                        <a asp-controller="Role"
                            asp-action="AddUserRole"
                            asp-route-id="@user.Id">
-                        Add a role</a></td>
+                            Add a role
+                        </a>
+                    </td>
                 </tr>
             }
         </table>
     }
 }
+
+<p><a asp-controller="Admin" asp-action="Home">Back to Admin Home</a></p>
+
 
 <p> &copy; 2020 - Team Quatro</p>

@@ -16,6 +16,7 @@ namespace CourseProject.Controllers
         private UserManager<ApplicationUser> userManager;
         private SignInManager<ApplicationUser> signInManager;
         private RoleManager<IdentityRole> roleManager;
+
         public AccountController(UserManager<ApplicationUser> userManager, 
             SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, SwimSchoolDbContext db)
         {

@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using CourseProject.Models;
 using CourseProject.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CourseProject.Controllers
 {
+    [Authorize(Roles = "Admin")]/*Role protection for the Roles page, if you havent added users/roles yet comment this out to access Roles controller*/
     public class RoleController : Controller
     {
         SwimSchoolDbContext db;
