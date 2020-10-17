@@ -6,6 +6,7 @@ using CourseProject.Models;
 using CourseProject.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CourseProject.Controllers
 {
@@ -56,6 +57,30 @@ namespace CourseProject.Controllers
             var user = await userManager.FindByIdAsync(id);
             vm.User = user;
             vm.RoleList = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(roleDisplay, "Id", "Value");
+            return View(vm);
+        }
+
+        [HttpPost] // make add role button work 
+        public async Task<IActionResult> AddUserRole(RoleAddUserRoleViewModel vm)
+        {
+            var user = await userManager.FindByIdAsync(vm.User.Id);
+            var role = await roleManager.FindByIdAsync(vm.Role);
+            var result = await userManager.AddToRoleAsync(user, role.Name);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("AllUser", "Account");
+            }
+            foreach(var error in result.Errors)
+            {
+                ModelState.AddModelError(error.Code, error.Description);
+            }
+            var roleDisplay = db.Roles.Select(x => new
+            {
+                Id = x.Id,
+                Value = x.Name
+            }).ToList();
+            vm.User = user;
+            vm.RoleList = new SelectList(roleDisplay, "Id", "Value");
             return View(vm);
         }
 
