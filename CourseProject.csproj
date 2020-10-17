@@ -14,11 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Coach\" />
-    <Folder Include="Views\Swimmer\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Controllers\AdminController.cs">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Compile>

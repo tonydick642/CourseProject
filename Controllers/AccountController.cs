@@ -39,7 +39,22 @@ namespace CourseProject.Controllers
                     (vm.Email, vm.Password, false, false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    var user = await userManager.FindByEmailAsync(vm.Email);
+                    var roles = await userManager.GetRolesAsync(user);
+                    if (roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Home", "Admin");
+                    }
+                    else if(roles.Contains("Swimmer"))
+                    {
+                        return RedirectToAction("Index", "Swimmer");
+                    }
+                    else if (roles.Contains("Coach"))
+                    {
+                        return RedirectToAction("Index", "Coach");
+                    }
+                    else return RedirectToAction("Index", "Home");
+
                 }
                 ModelState.AddModelError("", "Login Failure.");
             }

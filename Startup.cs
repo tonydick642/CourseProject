@@ -44,7 +44,7 @@ namespace CourseProject
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Admin}/{action=Home}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
             });
 
         }
