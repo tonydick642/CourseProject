@@ -59,5 +59,11 @@ namespace CourseProject.Controllers
             await db.SaveChangesAsync();
             return View("Index");
         }
+
+        public IActionResult AddSession()
+        {
+            Session session = new Session();
+            return View();
+        }
     }
 }
