@@ -1,0 +1,16 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model CourseProject.Models.Coach
+<h2>Add Your Profile</h2>
+<form asp-action="AddProfile">
+    <input asp-for="@Model.CoachId" type="hidden" />
+    <label asp-for="CoachName">Coach Name: </label>
+    <input asp-for="CoachName" />
+    <br />
+    <label asp-for="CoachPhone">Coach Phone: </label>
+    <input asp-for="CoachPhone" />
+    <br />
+    <button type="submit">Add Profile </button>
+</form>
+<p><a asp-controller="Coach" asp-action="Index">Back to Home </a></p>
