@@ -11,5 +11,8 @@ namespace CourseProject.Models
         public string SwimmerName { get; set; }
         public ICollection<Enrollment> Enrollments { get; set; }
         public ICollection<ProgressReport> ProgressReports { get; set; }
+        public string Gender { get; set; }
+        public int PhoneNumber { get; set; }
+        // insert DOB here
     }
 }
