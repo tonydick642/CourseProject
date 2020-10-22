@@ -11,6 +11,7 @@ namespace CourseProject.Models
         public string CoachName { get; set; }
         public string CoachPhone { get; set; }
         public ICollection<Session> Sessions { get; set; }
+        public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
     }
 }

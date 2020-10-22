@@ -14,6 +14,7 @@ namespace CourseProject.Models
         public string Gender { get; set; }
         public int SwimmerPhone { get; set; } 
         public DateTime dateOfBirth { get; set; }
+        public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
     }
 }
