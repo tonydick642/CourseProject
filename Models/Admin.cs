@@ -12,5 +12,6 @@ namespace CourseProject.Models
         public string AdminEmail { get; set; }
         public string AdminRole { get; set; }
         public string AdminPassword { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

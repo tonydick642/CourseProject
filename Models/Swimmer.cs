@@ -12,7 +12,8 @@ namespace CourseProject.Models
         public ICollection<Enrollment> Enrollments { get; set; }
         public ICollection<ProgressReport> ProgressReports { get; set; }
         public string Gender { get; set; }
-        public int PhoneNumber { get; set; }
-        // insert DOB here
+        public int SwimmerPhone { get; set; } 
+        public DateTime dateOfBirth { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }
