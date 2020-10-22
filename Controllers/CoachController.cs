@@ -61,6 +61,12 @@ namespace CourseProject.Controllers
             return View("Index");
         }
 
+        public async Task<IActionResult> AllLesson()
+        {
+            var lesson = await db.Lessons.Include
+                (c => c.Sessions).ToListAsync();
+            return View(lesson);
+        }
         public IActionResult AddSession()
         {
             Session session = new Session();
