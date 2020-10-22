@@ -1,7 +1,7 @@
 ﻿@model CourseProject.ViewModels.RoleAddUserRoleViewModel
 <p> Assign a role to @Model.User.UserName</p>
 
-<form asp-controller="Role" asp-action="AddUserRole"
+<form asp-controller="Admin" asp-action="AddUserRole"
       method="post">
     <div asp-validation-summary="All"></div>
     <input asp-for="@Model.User.Id" type="hidden" />

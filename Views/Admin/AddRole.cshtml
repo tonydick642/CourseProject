@@ -1,7 +1,7 @@
 ﻿@model Microsoft.AspNetCore.Identity.IdentityRole
 
     <h2> Add a new role </h2>
-<form asp-controller="Role"
+<form asp-controller="Admin"
       asp-action="AddRole" method="post">
     <label asp-for="Name"></label>
     <input asp-for="Name" />
@@ -10,7 +10,7 @@
 </form>
 <p><a asp-controller="Admin" asp-action="Home">Back to Admin Home</a></p>
 
-<p><a asp-controller="Role" asp-action="AllRole">Back to All Roles</a></p>
+<p><a asp-controller="Admin" asp-action="AllRole">Back to All Roles</a></p>
 
 
 <p> &copy; 2020 - Team Quatro</p>
