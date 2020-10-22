@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CourseProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Controllers
 {
@@ -45,7 +46,7 @@ namespace CourseProject.Controllers
         {
             var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            if(db.Coachs.Any(i=>  i.CoachName == currentUserId))
+            if (db.Coachs.Any(i => i.CoachName == currentUserId))
             {
                 var coachToUpdate = db.Coachs.FirstOrDefault(i => i.CoachName == currentUserId);
                 coachToUpdate.CoachName = coach.CoachName;
@@ -63,7 +64,12 @@ namespace CourseProject.Controllers
         public IActionResult AddSession()
         {
             Session session = new Session();
-            return View();
+            var currentUserId = this.User.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            session.CoachId = db.Coachs.
+                SingleOrDefault(i => i.UserId ==
+                currentUserId).CoachId;
+            return View(session);
         }
     }
 }

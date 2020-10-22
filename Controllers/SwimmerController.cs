@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CourseProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Controllers
 {
@@ -60,7 +61,11 @@ namespace CourseProject.Controllers
             await db.SaveChangesAsync();
             return View("Index");
         }
-    }
-
-   
+        public async Task<IActionResult> AllLesson()
+        {
+            var session = await db.Sessions.Include
+                (c => c.Coach).ToListAsync();
+            return View(session);
+        }
+    }      
 }
