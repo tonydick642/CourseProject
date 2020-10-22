@@ -13,7 +13,7 @@ namespace CourseProject.Controllers
     public class AdminController : Controller
     {
 
-        //[Authorize(Roles = "Admin")]/*Role protection for the admin home page, if you havent added users/roles yet comment this out to access admin home*/
+        [Authorize(Roles = "Admin")]/*Role protection for the admin home page, if you havent added users/roles yet comment this out to access admin home*/
         public IActionResult Home() => View();
 
         SwimSchoolDbContext db;
@@ -22,6 +22,15 @@ namespace CourseProject.Controllers
             return View();
 
         }
+        [HttpPost]
+        public async Task<IActionResult> AddLesson(Lesson lesson)
+        {
+            db.Add(lesson);
+            await db.SaveChangesAsync();
+            return RedirectToAction("AllLesson");
+            
+        }
+            
         public async Task<IActionResult> AllLesson()
         {
             var lesson = await db.Lessons.ToListAsync();
