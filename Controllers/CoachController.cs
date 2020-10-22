@@ -69,7 +69,7 @@ namespace CourseProject.Controllers
             session.CoachId = db.Coachs.
                 SingleOrDefault(i => i.UserId ==
                 currentUserId).CoachId;
-            return View(session);
+            return View();
         }
     }
 }
