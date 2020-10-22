@@ -94,11 +94,7 @@ namespace CourseProject.Controllers
 
         }
 
-        public IActionResult AllUser() //viewing all users
-        {
-            var users = db.Users.ToList();
-            return View(users);
-        }
+        
 
         [HttpPost]
         public async Task<IActionResult> Logout()

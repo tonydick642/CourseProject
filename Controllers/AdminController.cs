@@ -13,7 +13,7 @@ namespace CourseProject.Controllers
     public class AdminController : Controller
     {
 
-        [Authorize(Roles = "Admin")]/*Role protection for the admin home page, if you havent added users/roles yet comment this out to access admin home*/
+        //[Authorize(Roles = "Admin")]/*Role protection for the admin home page, if you havent added users/roles yet comment this out to access admin home*/
         public IActionResult Home() => View();
 
         SwimSchoolDbContext db;
@@ -97,6 +97,11 @@ namespace CourseProject.Controllers
             vm.RoleList = new SelectList(roleDisplay, "Id", "Value");
             return View(vm);
 
+        }
+        public IActionResult AllUser() //viewing all users
+        {
+            var users = db.Users.ToList();
+            return View(users);
         }
 
     }
