@@ -82,7 +82,7 @@ namespace CourseProject.Controllers
             var result = await userManager.AddToRoleAsync(user, role.Name);
             if (result.Succeeded)
             {
-                return RedirectToAction("AllUser", "Account");
+                return RedirectToAction("AllUser", "Admin");
             }
             foreach (var error in result.Errors)
             {
