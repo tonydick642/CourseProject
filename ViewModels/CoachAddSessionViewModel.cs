@@ -1,23 +1,30 @@
-﻿using System;
+﻿using CourseProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace CourseProject.Models
+namespace CourseProject.ViewModels
 {
-    public class Session
+    public class CoachAddSessionViewModel
     {
+        public ApplicationUser User { get; set; }
+        public string SkillLevel { get; set; }
         public int SessionId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int SeatsAvailable { get; set; }
         public DateTime DailyStartTime { get; set; }
         public int CoachId { get; set; }
-        public Coach Coach { get; set; }
+        
         public int LessonId { get; set; }
+        public Coach Coach { get; set; }
         public Lesson Lesson { get; set; }
-        public ICollection<Enrollment> Enrollments { get; set; }
-        public ICollection<ProgressReport> ProgressReports { get; set; }
-        public ICollection<LessonSession> LessonSessions { get; set; }
+        public LessonSession lessonSession { get; set; }
+        public Session session { get; set; }
+        
+        
+
     }
 }
