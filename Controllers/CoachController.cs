@@ -32,13 +32,14 @@ namespace CourseProject.Controllers
 
             Coach coach = new Coach();
 
-            if(db.Coachs.Any(i=> i.CoachName == currentUserId))
+            if(db.Coachs.Any(i=> i.UserId == currentUserId))
             {
-                coach = db.Coachs.FirstOrDefault(i => i.CoachName == currentUserId);
+                coach = db.Coachs.FirstOrDefault(i => i.UserId == currentUserId);
             }
             else
             {
-                coach.CoachName = currentUserId;
+                //coach.CoachName = currentUserId;
+                coach.UserId = currentUserId;
             }
             return View(coach);
         }
@@ -48,15 +49,16 @@ namespace CourseProject.Controllers
         {
             var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            if (db.Coachs.Any(i => i.CoachName == currentUserId))
+            if (db.Coachs.Any(i => i.UserId == currentUserId))
             {
-                var coachToUpdate = db.Coachs.FirstOrDefault(i => i.CoachName == currentUserId);
+                var coachToUpdate = db.Coachs.FirstOrDefault(i => i.UserId == currentUserId);
                 coachToUpdate.CoachName = coach.CoachName;
-                coachToUpdate.CoachPhone = coach.CoachPhone; ;
+                coachToUpdate.CoachPhone = coach.CoachPhone; 
                 db.Update(coachToUpdate);
             }
             else
             {
+                coach.UserId = currentUserId;
                 db.Add(coach);
             }
             await db.SaveChangesAsync();
@@ -73,25 +75,13 @@ namespace CourseProject.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> AddLessonSession(int id)
+        public async Task<IActionResult> SubmitSession(int id)
         {
-            var currentUserId = this.User.FindFirst
-                (ClaimTypes.NameIdentifier).Value;
-            var coachId = db.Coachs.FirstOrDefault
-                (s => s.UserId == currentUserId).CoachId;
-            LessonSession LessonSession = new LessonSession
-            {
-                LessonId = id,
-                CoachId = coachId
-
-            };
-            db.Add(LessonSession);
-            var SkillLevel = await db.Lessons.FindAsync
-                (LessonSession.LessonId);
-        
-        await db.SaveChangesAsync();
+                       
             return View("Index");
+            
         }
+  
         
     }
 }

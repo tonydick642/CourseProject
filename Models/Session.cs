@@ -18,6 +18,6 @@ namespace CourseProject.Models
         public Lesson Lesson { get; set; }
         public ICollection<Enrollment> Enrollments { get; set; }
         public ICollection<ProgressReport> ProgressReports { get; set; }
-        public ICollection<LessonSession> LessonSessions { get; set; }
+        
     }
 }

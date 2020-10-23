@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourseProject.Migrations
 {
     [DbContext(typeof(SwimSchoolDbContext))]
-    [Migration("20201022192457_M7")]
-    partial class M7
+    [Migration("20201023200832_M3")]
+    partial class M3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -250,8 +250,8 @@ namespace CourseProject.Migrations
                     b.Property<string>("SwimmerName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SwimmerPhone")
-                        .HasColumnType("int");
+                    b.Property<string>("SwimmerPhone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");

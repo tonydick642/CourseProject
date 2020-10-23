@@ -13,6 +13,6 @@ namespace CourseProject.Models
         public ICollection<Session> Sessions { get; set; }
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
-        public ICollection<LessonSession> LessonSessions { get; set; }
+     
     }
 }

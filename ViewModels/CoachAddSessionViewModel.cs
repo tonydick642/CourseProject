@@ -21,7 +21,7 @@ namespace CourseProject.ViewModels
         public int LessonId { get; set; }
         public Coach Coach { get; set; }
         public Lesson Lesson { get; set; }
-        public LessonSession lessonSession { get; set; }
+        
         public Session session { get; set; }
         
         

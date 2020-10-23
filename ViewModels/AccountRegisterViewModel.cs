@@ -20,6 +20,6 @@ namespace CourseProject.ViewModels
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage ="Password not match")]
         public string ConfirmPassword { get; set; }
-
+        //public string UserId { get; set; }
     }
 }
