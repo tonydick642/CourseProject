@@ -18,7 +18,13 @@
         <tr>
             <td>@lesson.LessonId</td>
             <td>@lesson.SkillLevel</td>
-            <td>Add Session</td>
+            <td>
+                @{
+                    <a asp-controller="Coach"
+                       asp-action="AddSession"
+                       asp-route-id="@lesson.LessonId">Add a session</a>
+                }
+            </td>
         </tr>
             }
         </table>
