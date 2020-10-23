@@ -5,7 +5,7 @@
       method="post">
     <div asp-validation-summary="All"></div>
     <input asp-for="@Model.User.Id" type="hidden" />
-    <label asp-for="Role"></label>
+    <label asp-for="Role">Role: </label>
     <select asp-for="Role"
             asp-items="@Model.RoleList"></select>
     <br />

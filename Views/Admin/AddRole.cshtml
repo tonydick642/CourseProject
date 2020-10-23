@@ -3,7 +3,7 @@
     <h2> Add a new role </h2>
 <form asp-controller="Admin"
       asp-action="AddRole" method="post">
-    <label asp-for="Name"></label>
+    <label asp-for="Name">Name: </label>
     <input asp-for="Name" />
     <br />
     <button type="submit">Add Role</button>

@@ -2,9 +2,19 @@
 <h2>Add Your Profile</h2>
 <form asp-action="AddProfile">
     <input asp-for="@Model.SwimmerId" type="hidden" />
-    <label asp-for="SwimmerName"></label>
+    <label asp-for="SwimmerName">Name: </label>
     <input asp-for="SwimmerName" />
     <br />
+    <label asp-for="SwimmerPhone">Phone Number: </label>
+    <input asp-for="SwimmerPhone" />
+    <br />
+    <label asp-for="dateOfBirth">Date Of Birth: </label>
+    <input asp-for="dateOfBirth" />
+    <br />
+    <label asp-for="Gender">Gender: </label>
+    <input asp-for="Gender" />
+    <br />
+
     <button type="submit">Add Profile</button>
 </form>
 <p><a asp-action="Index">Back to swimmer home</a></p>

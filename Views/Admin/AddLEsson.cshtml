@@ -1,9 +1,9 @@
 ﻿@model CourseProject.Models.Lesson
 <form asp-controller="Admin" asp-action="AddLesson" method="post">
-    <label asp-for="SkillLevel"></label>
+    <label asp-for="SkillLevel">Skill Level: </label>
     <input asp-for="SkillLevel" />
     <br />
-    <label asp-for="Tuition"></label>
+    <label asp-for="Tuition">Tuition: </label>
     <input asp-for="Tuition" />
     <br />
     <button type="submit">Add Lesson</button>

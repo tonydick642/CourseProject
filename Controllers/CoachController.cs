@@ -68,13 +68,7 @@ namespace CourseProject.Controllers
             return View(lesson);
         }
         public IActionResult AddSession()
-        {
-            Session session = new Session();
-            var currentUserId = this.User.FindFirst
-                (ClaimTypes.NameIdentifier).Value;
-            session.CoachId = db.Coachs.
-                SingleOrDefault(i => i.UserId ==
-                currentUserId).CoachId;
+        { 
             return View();
         }
     }
