@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using CourseProject.Models;
+using CourseProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -68,8 +70,28 @@ namespace CourseProject.Controllers
             return View(lesson);
         }
         public IActionResult AddSession()
-        { 
+        {
             return View();
         }
+        public async Task<IActionResult> AddLessonSession(int id)
+        {
+            var currentUserId = this.User.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            var coachId = db.Coachs.FirstOrDefault
+                (s => s.UserId == currentUserId).CoachId;
+            LessonSession LessonSession = new LessonSession
+            {
+                LessonId = id,
+                CoachId = coachId
+
+            };
+            db.Add(LessonSession);
+            var SkillLevel = await db.Lessons.FindAsync
+                (LessonSession.LessonId);
+        
+        await db.SaveChangesAsync();
+            return View("Index");
+        }
+        
     }
 }

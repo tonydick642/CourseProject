@@ -11,5 +11,6 @@ namespace CourseProject.Models
         public string SkillLevel { get; set; }
         public decimal Tuition { get; set; }
         public ICollection<Session> Sessions { get; set; }
+        public ICollection<LessonSession> LessonSessions { get; set; }
     }
 }

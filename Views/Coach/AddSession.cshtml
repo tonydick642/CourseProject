@@ -1,19 +1,19 @@
-﻿@model CourseProject.Models.Session
+﻿@model CourseProject.ViewModels.CoachAddSessionViewModel
 <form asp-controller="Coach" asp-action="AddSession" method="post">
-    <h1>Create a new session of @Model.Lesson.SkillLevel</h1>
-        <label asp-for="StartDate">Start Date: </label>
-        <input asp-for="StartDate" />
+    <h1>Create a new session of @{/*Model.Lesson.SkillLevel*/}</h1>
+        <label asp-for="StartDate"></label>
+        <input asp-for="StartDate"/>
         <br />
-        <label asp-for="EndDate">End Date: </label>
+        <label asp-for="EndDate"></label>
         <input asp-for="EndDate" />
         <br />
-        <label asp-for="SeatsAvailable">Spots available: </label>
+        <label asp-for="SeatsAvailable"></label>
         <input asp-for="SeatsAvailable" />
         <br />
-        <label asp-for="DailyStartTime">Daily Start Time: </label>
+        <label asp-for="DailyStartTime"></label>
         <input asp-for="DailyStartTime" />
         <br />
         <input asp-for="CoachId" type="hidden" />
         <br />
-        <button type="submit">Add session</button>
-</form>
+<button type ="submit">Add session</button>
+        </form>
