@@ -96,7 +96,7 @@ namespace CourseProject.Controllers
             
         }
         [HttpPost]
-        public async Task<IActionResult> SubmitSession(Session session, int lessonId, int id)
+        public async Task<IActionResult> AddSession(Session session, int lessonId, int id)
         {
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
