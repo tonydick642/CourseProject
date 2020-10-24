@@ -26,46 +26,61 @@ namespace CourseProject.Controllers
 
         public IActionResult AddProfile()
         {
+            
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
             Swimmer swimmer = new Swimmer();
-            if (db.Swimmers.Any(i => i.SwimmerName == currentUserId))
+            if (db.Swimmers.Any(i => i.UserId == currentUserId))
             {
                 swimmer = db.Swimmers.FirstOrDefault(i =>
-                i.SwimmerName == currentUserId);
+                i.UserId == currentUserId);
             }
             else
             {
-                swimmer.SwimmerName = currentUserId;
+                swimmer.UserId = currentUserId;
             }
 
             return View(swimmer);
         }
         [HttpPost]
-        public async Task<IActionResult> AddProfile
-            (Swimmer swimmer)
+        public async Task<IActionResult> AddProfile(Swimmer swimmer)
         {
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
-            if (db.Swimmers.Any(i => i.SwimmerName == currentUserId))
+            
+            if (db.Swimmers.Any(i => i.UserId == currentUserId))
             {
                 var swimmerToUpdate = db.Swimmers.FirstOrDefault
-                    (i => i.SwimmerName == currentUserId);
+                    (i => i.UserId == currentUserId);
                 swimmerToUpdate.SwimmerName = swimmer.SwimmerName;
+                swimmerToUpdate.SwimmerPhone = swimmer.SwimmerPhone;
                 db.Update(swimmerToUpdate);
             }
             else
             {
+                swimmer.UserId = currentUserId;
                 db.Add(swimmer);
             }
             await db.SaveChangesAsync();
             return View("Index");
         }
-        public async Task<IActionResult> AllLesson()
+        public async Task<IActionResult> AllSession()
         {
             var session = await db.Sessions.Include
-                (c => c.Coach).ToListAsync();
+                (c => c.Lesson).ToListAsync();
             return View(session);
         }
+        public IActionResult EnrollSession()
+        {
+            return View("Index");
+        }
+        [HttpPost]
+        public IActionResult EnrollSession()
+        {
+            return View("Index");
+        }
+
+
+
     }      
 }
