@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using CourseProject.Models;
+using CourseProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace CourseProject.Controllers
 {
@@ -23,7 +27,11 @@ namespace CourseProject.Controllers
         {
             return View();
         }
-
+        public async Task<IActionResult> AllLesson()
+        {
+            var lesson = await db.Lessons.ToListAsync();
+            return View(lesson);
+        }
         public IActionResult AddProfile()
         {
             
@@ -67,16 +75,27 @@ namespace CourseProject.Controllers
         public async Task<IActionResult> AllSession()
         {
             var session = await db.Sessions.Include
-                (c => c.Lesson).ToListAsync();
+                (c => c.Coach).ToListAsync();
             return View(session);
         }
-        public IActionResult EnrollSession()
+        public IActionResult EnrollSession(int id)
         {
             return View("Index");
         }
         [HttpPost]
-        public IActionResult EnrollSession()
+        public async Task<IActionResult> EnrollSession()
         {
+            var currentUserId = this.User.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            var swimmerId = db.Swimmers.FirstOrDefault
+                (s => s.UserId == currentUserId).SwimmerId;
+
+            //session.LessonId = id;
+           // session.CoachId = coachId;
+
+
+            //db.Add(Enrollment);
+            await db.SaveChangesAsync();
             return View("Index");
         }
 

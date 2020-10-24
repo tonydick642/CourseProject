@@ -10,7 +10,7 @@
         <table border="1">
             <tr>
                 <th>Session ID</th>
-                <th>Skill Level</th>
+                
                 <th>Tuition</th>
                 <th>Seats Available</th>
                 <th>Start Date</th>
@@ -18,18 +18,16 @@
                 <th>Daily Start Time</th>
                 <th>Coach Name</th>
             </tr>
-            @foreach (var lesson in Model)
+            @foreach (var session in Model)
             {
         <tr>
-            <td>@lesson.LessonId</td>
-            <td>@lesson.SkillLevel</td>
-            <td>@lesson.Tuition</td>
+            <td>@session.LessonId</td>
             <td>@session.SeatsAvailable</td>
-            <td>@</td>
-            <td>@</td>
-            <td>@</td>
-            <td>@</td>
-            <td>@</td>
+            <td>@session.StartDate</td>
+            <td>@session.EndDate</td>
+            <td>@session.DailyStartTime</td>
+            <td>@session.Coach.CoachName</td>
+            
         </tr>
             }
         </table>
