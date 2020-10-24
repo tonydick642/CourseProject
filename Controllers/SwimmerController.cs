@@ -27,6 +27,13 @@ namespace CourseProject.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> ViewReport()
+        {
+            var report = await db.ProgressReports.ToListAsync();
+            return View(report);
+        }
+
         public async Task<IActionResult> AllLesson()
         {
             var lesson = await db.Lessons.ToListAsync();
