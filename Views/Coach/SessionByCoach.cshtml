@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CourseProject.ViewModels.CoachAddProgressReportViewModel>
+<h2>@Model.FirstOrDefault().Coach.CoachName</h2>
+@{ 
+    if (Model.Count() < 1)
+    {
+        <p>You don't have any sessions yet. <a asp-for="AddSession"> Add a session</a></p>
+    }
+    else
+    {
+        <h3>All Sessions</h3>
+        <table border="1">
+            <tr>
+                <th>Session ID</th>
+                <th>Lesson Name</th>
+                <th>Seats Available</th>
+                <th>Progress Report</th>
+            </tr>
+            @foreach (var session in Model)
+            {
+                <tr>
+                    <td>@session.SessionId</td>
+                    <td>@session.SkillLevel</td>
+                    <td>@session.SeatsAvailable</td>
+                    <td>
+                        <a asp-controller="Coach"
+                           asp-action="PostReport"
+                           asp-route-id="@session.SessionId">Post Progress Report</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+}
+<p><a asp-action="Index">Back to coach home</a></p>

@@ -12,8 +12,6 @@ namespace CourseProject.Models
         public Swimmer Swimmer { get; set; }
         public int SessionId { get; set; }
         public Session Session { get; set; }
-        public string Report { get; set; }
-
-        
+        public string Report { get; set; }        
     }
 }
