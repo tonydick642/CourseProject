@@ -69,54 +69,49 @@ namespace CourseProject.Controllers
         {
             var lesson = await db.Lessons.Include
                 (c => c.Sessions).ToListAsync();
-            
             return View(lesson);
         }
-        public IActionResult AddSession()
+        public IActionResult AddSession(int id)
         {
-           
+            var currentUserId = this.User.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            var coachId = db.Coachs.FirstOrDefault
+                (s => s.UserId == currentUserId).CoachId;
+            int lessonId = id;
+
             return View();
         }
-        public async Task<IActionResult> SubmitSession(int id)
+        public IActionResult SubmitSession(int id)
         {
             Session session = new Session();
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
-            session.CoachId = db.Coachs.
-                SingleOrDefault(i => i.UserId == currentUserId).CoachId;
+            var coachId = db.Coachs.FirstOrDefault
+                (s => s.UserId == currentUserId).CoachId;
+            session.LessonId = id;
+            int lessonId = id;
+            
+            
             return View("Index");
+            
         }
         [HttpPost]
-        public async Task<IActionResult> SubmitSession(Session session)
-        {
-            db.Add(session);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index", "Coach");
-        }
-
-        public async Task<IActionResult> SessionByCoach()
+        public async Task<IActionResult> AddSession(Session session, int lessonId, int id)
         {
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
-            var CoachId = db.Coachs.SingleOrDefault
-                (i => i.UserId == currentUserId).CoachId;
-            var session = await db.Sessions.Where(i =>
-            i.CoachId == CoachId).ToListAsync();
-            return View(session);
-        }
-        public async Task<IActionResult> PostProgressReport(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var allSwimmers = await db.Enrollments.Include
-                (c => c.Session).Where(c => c.SessionId == id).ToListAsync();
-            if (allSwimmers == null)
-            {
-                return NotFound();
-            }
-            return View(allSwimmers);
+            var coachId = db.Coachs.FirstOrDefault
+                (s => s.UserId == currentUserId).CoachId;
+            //session.LessonId = id;
+          //  var lessonVar = db.Lessons.FirstOrDefault
+          //      (l => l.LessonId == lessonId).LessonId;
+
+            session.LessonId = id;
+            session.CoachId = coachId;
+
+            db.Add(session);
+            await db.SaveChangesAsync();
+            return View("Index");
         }
   
         

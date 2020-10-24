@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using CourseProject.Models;
+using CourseProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace CourseProject.Controllers
 {
@@ -23,9 +27,14 @@ namespace CourseProject.Controllers
         {
             return View();
         }
-
+        public async Task<IActionResult> AllLesson()
+        {
+            var lesson = await db.Lessons.ToListAsync();
+            return View(lesson);
+        }
         public IActionResult AddProfile()
         {
+            
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
             Swimmer swimmer = new Swimmer();
@@ -42,16 +51,17 @@ namespace CourseProject.Controllers
             return View(swimmer);
         }
         [HttpPost]
-        public async Task<IActionResult> AddProfile
-            (Swimmer swimmer)
+        public async Task<IActionResult> AddProfile(Swimmer swimmer)
         {
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
+            
             if (db.Swimmers.Any(i => i.UserId == currentUserId))
             {
                 var swimmerToUpdate = db.Swimmers.FirstOrDefault
                     (i => i.UserId == currentUserId);
                 swimmerToUpdate.SwimmerName = swimmer.SwimmerName;
+                swimmerToUpdate.SwimmerPhone = swimmer.SwimmerPhone;
                 db.Update(swimmerToUpdate);
             }
             else
@@ -68,24 +78,28 @@ namespace CourseProject.Controllers
                 (c => c.Coach).ToListAsync();
             return View(session);
         }
-
-        public async Task<IActionResult> EnrollSession(int id)
+        public IActionResult EnrollSession(int id)
+        {
+            return View("Index");
+        }
+        [HttpPost]
+        public async Task<IActionResult> EnrollSession()
         {
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
             var swimmerId = db.Swimmers.FirstOrDefault
                 (s => s.UserId == currentUserId).SwimmerId;
-            Enrollment enrollment = new Enrollment
-            {
-                SessionId = id,
-                SwimmerId = swimmerId
-            };
-            db.Add(enrollment);
-            var session = await db.Sessions.FindAsync
-                (enrollment.SessionId);
-            session.SeatsAvailable--;
+
+            //session.LessonId = id;
+           // session.CoachId = coachId;
+
+
+            //db.Add(Enrollment);
             await db.SaveChangesAsync();
             return View("Index");
         }
+
+
+
     }      
 }

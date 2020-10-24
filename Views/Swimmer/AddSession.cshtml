@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CourseProject.ViewModels.SwimmerJoinSessionViewModel>
+@{
+    if (Model.Count() < 1)
+    {
+        <p>No lesson in database yet.</p>
+    }
+    else
+    {
+        <h3>All Sessions</h3>
+        <table border="1">
+            <tr>
+                <th>Session ID</th>
+                
+                <th>Tuition</th>
+                <th>Seats Available</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Daily Start Time</th>
+                <th>Coach Name</th>
+            </tr>
+            @foreach (var session in Model)
+            {
+        <tr>
+            <td>@session.LessonId</td>
+            <td>@session.SeatsAvailable</td>
+            <td>@session.StartDate</td>
+            <td>@session.EndDate</td>
+            <td>@session.DailyStartTime</td>
+            <td>@session.Coach.CoachName</td>
+            
+        </tr>
+            }
+        </table>
+        }
+    }
+
+
+        <p><a asp-controller="Admin" asp-action="Home">Admin Home</a></p>
+        <p> &copy; 2020 - Team Quatro</p>
