@@ -101,7 +101,7 @@ namespace CourseProject.Controllers
             enrollment.SwimmerId = swimmerId;
               enrollment.SessionId = id;
 
-
+            enrollment.ProgressReport = null;
             db.Add(enrollment);
             await db.SaveChangesAsync();
             return View("Index");
