@@ -113,6 +113,17 @@ namespace CourseProject.Controllers
             await db.SaveChangesAsync();
             return View("Index");
         }
+
+        public async Task<IActionResult> SessionByCoach()
+        {
+            var currentUserId = this.User.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            var CoachId = db.Coachs.SingleOrDefault
+                (i => i.UserId == currentUserId).CoachId;
+            var session = await db.Sessions.Where(i =>
+            i.CoachId == CoachId).ToListAsync();
+            return View(session);
+        }
         public async Task<IActionResult> PostProgressReport(int? id)
         {
             if (id == null)
@@ -128,6 +139,17 @@ namespace CourseProject.Controllers
                 return NotFound();
             }
             return View(allSwimmers);
+        }
+        [HttpPost]
+       public IActionResult PostProgressReport(List<Enrollment> enrollments)
+        {
+            foreach (var enrollment in enrollments)
+            {
+                var er = db.Enrollments.Find(enrollment.EnrollmentId);
+                er.ProgressReport = enrollment.ProgressReport;
+            }
+            db.SaveChanges();
+            return RedirectToAction("SessionByCoach");
         }
         
     }

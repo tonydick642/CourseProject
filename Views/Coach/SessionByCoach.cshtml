@@ -1,5 +1,5 @@
-﻿@model IEnumerable<CourseProject.ViewModels.CoachAddProgressReportViewModel>
-<h2>@Model.FirstOrDefault().Coach.CoachName</h2>
+﻿@model IEnumerable<CourseProject.Models.Session>
+<h2>Post Progress Report</h2>
 @{ 
     if (Model.Count() < 1)
     {
@@ -11,22 +11,22 @@
         <table border="1">
             <tr>
                 <th>Session ID</th>
-                <th>Lesson Name</th>
                 <th>Seats Available</th>
+                <th>Lesson ID</th>
                 <th>Progress Report</th>
             </tr>
             @foreach (var session in Model)
             {
-                <tr>
-                    <td>@session.SessionId</td>
-                    <td>@session.SkillLevel</td>
-                    <td>@session.SeatsAvailable</td>
-                    <td>
-                        <a asp-controller="Coach"
-                           asp-action="PostReport"
-                           asp-route-id="@session.SessionId">Post Progress Report</a>
-                    </td>
-                </tr>
+        <tr>
+            <td>@session.SessionId</td>
+            <td>@session.SeatsAvailable</td>
+            <td>@session.LessonId</td>
+            <td>
+                <a asp-controller="Coach"
+                   asp-action="PostProgressReport"
+                   asp-route-id="@session.SessionId">Post Progress Report</a>
+            </td>
+        </tr>
             }
         </table>
     }
