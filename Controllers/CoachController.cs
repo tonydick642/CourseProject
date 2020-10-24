@@ -71,15 +71,47 @@ namespace CourseProject.Controllers
                 (c => c.Sessions).ToListAsync();
             return View(lesson);
         }
-        public IActionResult AddSession()
+        public IActionResult AddSession(int id)
         {
+            var currentUserId = this.User.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            var coachId = db.Coachs.FirstOrDefault
+                (s => s.UserId == currentUserId).CoachId;
+            int lessonId = id;
+
             return View();
         }
-        public async Task<IActionResult> SubmitSession(int id)
+        public IActionResult SubmitSession(int id)
         {
-                       
+            Session session = new Session();
+            var currentUserId = this.User.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            var coachId = db.Coachs.FirstOrDefault
+                (s => s.UserId == currentUserId).CoachId;
+            session.LessonId = id;
+            int lessonId = id;
+            
+            
             return View("Index");
             
+        }
+        [HttpPost]
+        public async Task<IActionResult> SubmitSession(Session session, int lessonId, int id)
+        {
+            var currentUserId = this.User.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            var coachId = db.Coachs.FirstOrDefault
+                (s => s.UserId == currentUserId).CoachId;
+            //session.LessonId = id;
+          //  var lessonVar = db.Lessons.FirstOrDefault
+          //      (l => l.LessonId == lessonId).LessonId;
+
+            session.LessonId = id;
+            session.CoachId = coachId;
+
+            db.Add(session);
+            await db.SaveChangesAsync();
+            return View("Index");
         }
   
         
