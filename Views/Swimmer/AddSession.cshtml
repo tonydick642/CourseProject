@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CourseProject.ViewModels.SwimmerJoinSessionViewModel>
+﻿@model IEnumerable<CourseProject.Models.Session>
 @{
     if (Model.Count() < 1)
     {
@@ -9,14 +9,13 @@
         <h3>All Sessions</h3>
         <table border="1">
             <tr>
-                <th>Session ID</th>
-                
-                <th>Tuition</th>
+                <th>Lesson ID</th>
                 <th>Seats Available</th>
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Daily Start Time</th>
                 <th>Coach Name</th>
+                <th>Enroll</th>
             </tr>
             @foreach (var session in Model)
             {
@@ -27,7 +26,9 @@
             <td>@session.EndDate</td>
             <td>@session.DailyStartTime</td>
             <td>@session.Coach.CoachName</td>
-            
+            <td><a asp-controller="Swimmer"
+                   asp-action="EnrollSession"
+                   asp-route-id="@session.SessionId">Enroll</a></td>
         </tr>
             }
         </table>
