@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CourseProject.Models.ProgressReport>
+﻿@model IEnumerable<CourseProject.Models.Enrollment>
 
 <h2>Progress Reports</h2>
 @{
@@ -11,18 +11,16 @@
         <h3>All Reports</h3>
         <table border="1">
             <tr>
-                <th>Report ID</th>
-                <th>Session ID</th>
                 <th>Swimmer ID</th>
+                <th>Session ID</th>
                 <th>Report </th>
             </tr>
-            @foreach (var progressReport in Model)
+            @foreach (var enrollment in Model)
             {
         <tr>
-            <td>@progressReport.ProgressReportId</td>
-            <td>@progressReport.SessionId</td>
-            <td>@progressReport.SwimmerId</td>
-            <td>@progressReport.Report</td>
+            <td>@enrollment.SwimmerId</td>
+            <td>@enrollment.SessionId</td>
+            <td>@enrollment.ProgressReport</td>
         </tr>
             }
         </table>

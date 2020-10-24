@@ -30,8 +30,10 @@ namespace CourseProject.Controllers
 
         public async Task<IActionResult> ViewReport()
         {
-            var report = await db.ProgressReports.ToListAsync();
+            var report = await db.Enrollments.Include
+                (c => c.Swimmer).ToListAsync();
             return View(report);
+
         }
 
         public async Task<IActionResult> AllLesson()
