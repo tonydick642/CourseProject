@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CourseProject.Models.ProgressReport>
+
+<h2>Progress Reports</h2>
+@{
+    if (Model.Count() < 1)
+    {
+        <p>No reports yet.</p>
+    }
+    else
+    {
+        <h3>All Reports</h3>
+        <table border="1">
+            <tr>
+                <th>Report ID</th>
+                <th>Session ID</th>
+                <th>Swimmer ID</th>
+                <th>Report </th>
+            </tr>
+            @foreach (var progressReport in Model)
+            {
+        <tr>
+            <td>@progressReport.ProgressReportId</td>
+            <td>@progressReport.SessionId</td>
+            <td>@progressReport.SwimmerId</td>
+            <td>@progressReport.Report</td>
+        </tr>
+            }
+        </table>
+    }
+}
+<p><a asp-action="Index">Back to swimmer home</a></p>
+

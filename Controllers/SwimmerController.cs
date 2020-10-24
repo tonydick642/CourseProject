@@ -27,6 +27,13 @@ namespace CourseProject.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> ViewReport()
+        {
+            var report = await db.ProgressReports.ToListAsync();
+            return View(report);
+        }
+
         public async Task<IActionResult> AllLesson()
         {
             var lesson = await db.Lessons.ToListAsync();
@@ -78,9 +85,27 @@ namespace CourseProject.Controllers
                 (c => c.Coach).ToListAsync();
             return View(session);
         }
-        public IActionResult EnrollSession(int id)
+        public async Task<IActionResult> AddSession()
         {
+            var session = await db.Sessions.Include
+                (c => c.Coach).ToListAsync();
+            return View(session);
+        }
+        public async Task<IActionResult> EnrollSession(Enrollment enrollment,int sessionId, int id)
+        {
+            var currentUserId = this.User.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            var swimmerId = db.Swimmers.FirstOrDefault
+                (s => s.UserId == currentUserId).SwimmerId;
+
+            enrollment.SwimmerId = swimmerId;
+              enrollment.SessionId = id;
+
+            enrollment.ProgressReport = null;
+            db.Add(enrollment);
+            await db.SaveChangesAsync();
             return View("Index");
+            
         }
         [HttpPost]
         public async Task<IActionResult> EnrollSession()
@@ -90,8 +115,8 @@ namespace CourseProject.Controllers
             var swimmerId = db.Swimmers.FirstOrDefault
                 (s => s.UserId == currentUserId).SwimmerId;
 
-            //session.LessonId = id;
-           // session.CoachId = coachId;
+         //  session.sessionId = id;
+         //  session.CoachId = coachId;
 
 
             //db.Add(Enrollment);
