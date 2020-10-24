@@ -13,11 +13,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Controllers
 {
-    [Authorize(Roles ="Coach,Admin")]
+    [Authorize(Roles = "Coach,Admin")]
     public class CoachController : Controller
     {
         private readonly SwimSchoolDbContext db;
-        
+
         public CoachController(SwimSchoolDbContext db)
         { this.db = db; }
 
@@ -32,7 +32,7 @@ namespace CourseProject.Controllers
 
             Coach coach = new Coach();
 
-            if(db.Coachs.Any(i=> i.UserId == currentUserId))
+            if (db.Coachs.Any(i => i.UserId == currentUserId))
             {
                 coach = db.Coachs.FirstOrDefault(i => i.UserId == currentUserId);
             }
@@ -53,7 +53,7 @@ namespace CourseProject.Controllers
             {
                 var coachToUpdate = db.Coachs.FirstOrDefault(i => i.UserId == currentUserId);
                 coachToUpdate.CoachName = coach.CoachName;
-                coachToUpdate.CoachPhone = coach.CoachPhone; 
+                coachToUpdate.CoachPhone = coach.CoachPhone;
                 db.Update(coachToUpdate);
             }
             else
@@ -90,10 +90,10 @@ namespace CourseProject.Controllers
                 (s => s.UserId == currentUserId).CoachId;
             session.LessonId = id;
             int lessonId = id;
-            
-            
+
+
             return View("Index");
-            
+
         }
         [HttpPost]
         public async Task<IActionResult> AddSession(Session session, int lessonId, int id)
@@ -103,8 +103,8 @@ namespace CourseProject.Controllers
             var coachId = db.Coachs.FirstOrDefault
                 (s => s.UserId == currentUserId).CoachId;
             //session.LessonId = id;
-          //  var lessonVar = db.Lessons.FirstOrDefault
-          //      (l => l.LessonId == lessonId).LessonId;
+            //  var lessonVar = db.Lessons.FirstOrDefault
+            //      (l => l.LessonId == lessonId).LessonId;
 
             session.LessonId = id;
             session.CoachId = coachId;
@@ -113,7 +113,22 @@ namespace CourseProject.Controllers
             await db.SaveChangesAsync();
             return View("Index");
         }
-  
+        public async Task<IActionResult> PostProgressReport(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+
+            }
+            var allSwimmers = await db.Enrollments.Include
+                (c => c.Session).Where(c => c.SessionId == id)
+                .ToListAsync();
+            if (allSwimmers == null)
+            {
+                return NotFound();
+            }
+            return View(allSwimmers);
+        }
         
     }
 }
