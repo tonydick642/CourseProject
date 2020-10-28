@@ -20,8 +20,9 @@ namespace CourseProject
         {
             services.AddMvc();
             var connection =
-                @"Server=(localdb)\MSSQLLocalDb;Database=SwimSchoolDb;
-                    Trusted_Connection=True;";
+                  //@"Server=(localdb)\MSSQLLocalDb;Database=SwimSchoolDb2;
+                  //  Trusted_Connection=True;";
+                  @"Server = tcp:courseprojectdbserver.database.windows.net,1433; Initial Catalog = CourseProject_db; Persist Security Info = False; User ID = admin@gmail.com @courseprojectdbserver; Password =TeamQuatro1!; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
             services.AddDbContext<SwimSchoolDbContext>
                 (options => options.UseSqlServer(connection));
             services.AddIdentity<ApplicationUser, IdentityRole>()

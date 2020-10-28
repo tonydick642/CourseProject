@@ -17,7 +17,7 @@ namespace CourseProject.Models
         public int LessonId { get; set; }
         public Lesson Lesson { get; set; }
         public ICollection<Enrollment> Enrollments { get; set; }
-        public ICollection<ProgressReport> ProgressReports { get; set; }
+      
         
     }
 }

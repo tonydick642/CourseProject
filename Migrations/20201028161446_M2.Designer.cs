@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourseProject.Migrations
 {
     [DbContext(typeof(SwimSchoolDbContext))]
-    [Migration("20201024033818_M4")]
-    partial class M4
+    [Migration("20201028161446_M2")]
+    partial class M2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -145,7 +145,7 @@ namespace CourseProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Report")
+                    b.Property<string>("ProgressReport")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SessionId")
@@ -179,31 +179,6 @@ namespace CourseProject.Migrations
                     b.HasKey("LessonId");
 
                     b.ToTable("Lessons");
-                });
-
-            modelBuilder.Entity("CourseProject.Models.ProgressReport", b =>
-                {
-                    b.Property<int>("ProgressReportId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Report")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SessionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SwimmerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProgressReportId");
-
-                    b.HasIndex("SessionId");
-
-                    b.HasIndex("SwimmerId");
-
-                    b.ToTable("ProgressReports");
                 });
 
             modelBuilder.Entity("CourseProject.Models.Session", b =>
@@ -424,21 +399,6 @@ namespace CourseProject.Migrations
 
                     b.HasOne("CourseProject.Models.Swimmer", "Swimmer")
                         .WithMany("Enrollments")
-                        .HasForeignKey("SwimmerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CourseProject.Models.ProgressReport", b =>
-                {
-                    b.HasOne("CourseProject.Models.Session", "Session")
-                        .WithMany("ProgressReports")
-                        .HasForeignKey("SessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CourseProject.Models.Swimmer", "Swimmer")
-                        .WithMany("ProgressReports")
                         .HasForeignKey("SwimmerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
